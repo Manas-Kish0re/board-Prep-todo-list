@@ -1,0 +1,201 @@
+:root {
+  /* Redesign UI - Modern, clean look */
+  --bg: #2a1a1f; /* Dark pinkish background */
+  --card: #4a2c33; /* Lighter pinkish card */
+  --muted: #a58a92; /* Muted pink for secondary text */
+  --accent: #d16d82; /* Pink accent */
+  --accent-hover: #b8566a; /* Darker pink for hover */
+  --text: #f4e4e9; /* Light text for contrast */
+  --radius: 16px; /* Rounded corners */
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+
+  --spacing-1: 8px;  /* Fibonacci: 1 */
+  --spacing-2: 13px; /* Fibonacci: 2 */
+  --spacing-3: 21px; /* Fibonacci: 3 */
+  --spacing-4: 34px; /* Fibonacci: 5 */
+  --spacing-5: 55px; /* Fibonacci: 8 */
+  --font-small: 13px; /* Fibonacci-inspired font size */
+  --font-medium: 21px; /* Fibonacci-inspired font size */
+  --font-large: 34px; /* Fibonacci-inspired font size */
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-5);
+  border: 8px solid var(--card); /* Add a boundary border around the entire layout */
+  box-sizing: border-box;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 600px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.header h1 {
+  font-size: var(--font-large);
+  margin: 0;
+  color: var(--text);
+}
+
+.subtitle {
+  font-size: var(--font-small);
+  color: var(--muted);
+  margin-top: var(--spacing-1);
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--spacing-4);
+  gap: var(--spacing-3);
+  border: 2px solid var(--accent); /* Add a boundary border around the card */
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--spacing-3);
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid var(--muted);
+  display: inline-block;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+.checkbox input:checked + .checkmark {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.checkmark::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 10px;
+  border: 2px solid white;
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(45deg);
+  top: 4px;
+  left: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.checkbox input:checked + .checkmark::after {
+  opacity: 1;
+}
+
+.task {
+  font-size: var(--font-medium);
+  color: var(--text);
+}
+
+.checkbox input:checked ~ .task {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 16px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .task {
+    font-size: 14px;
+  }
+}
+
+.emoji-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.emoji {
+  position: absolute;
+  font-size: 24px;
+  animation: float 5s infinite ease-in-out;
+  opacity: 0.8;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 500;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+a:active {
+  color: var(--accent);
+  transform: scale(0.95);
+}
